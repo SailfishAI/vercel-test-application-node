@@ -10,8 +10,7 @@ if (!(globalThis as any).__interceptors_initialized__) {
   console.log("Initializing interceptors in middleware...");
   setupInterceptors({
     apiGraphqlEndpoint:
-      process.env.API_GRAPHQL_ENDPOINT || "http://localhost:8000/graphql/",
-    apiKey: process.env.API_KEY || "e66bfbc9-c069-4591-bac6-605b0116b7eb",
+    apiKey: process.env.API_KEY || "75ebed9a-b0dc-4a45-bd80-30b1516d8016",
     domainsToNotPropagateHeadersTo: [
       "google.com",
       "https://app.sailfishqa.com",
