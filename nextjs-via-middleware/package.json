@@ -9,7 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@sailfish/sf-veritas-nextjs": "^0.1.3",
+    "@sailfish/sf-veritas-nextjs": "^0.1.4",
     "dotenv": "^16.4.6",
     "next": "^15.0.4",
     "react": "^18.2.0",
