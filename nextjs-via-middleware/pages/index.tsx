@@ -1,6 +1,21 @@
 "use client";
 
+import { useEffect } from "react";
+
 export default function Home() {
+  useEffect(() => {
+    // Start recording when the component is mounted
+    import("@sailfish/recorder")
+      .then(({ startRecording }) => {
+        startRecording({
+          apiKey: "75ebed9a-b0dc-4a45-bd80-30b1516d8016",
+        });
+      })
+      .catch((error) => {
+        console.error("[Frontend] Failed to load @sailfish/recorder:", error);
+      });
+  }, []);
+
   const fetchHello = async () => {
     console.log("[Frontend] Fetching data from /api/hello...");
     try {
@@ -24,7 +39,7 @@ export default function Home() {
   };
 
   const fetchException = async () => {
-    console.log("[Frontend] Fetching data from /api/exception:");
+    console.log("[Frontend] Fetching data from /api/exception...");
     try {
       const response = await fetch("/api/exception");
       const data = await response.json();
