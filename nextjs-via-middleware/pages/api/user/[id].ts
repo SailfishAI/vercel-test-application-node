@@ -1,6 +1,5 @@
 import "../serverInit";
 
-import { customFetch as fetch } from "@sailfish/sf-veritas-nextjs";
 import { NextApiRequest, NextApiResponse } from "next";
 
 export default async function handler(
