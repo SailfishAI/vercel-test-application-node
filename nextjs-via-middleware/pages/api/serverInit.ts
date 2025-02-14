@@ -1,22 +1,28 @@
 import {
-  addOrUpdateMetadata,
-  identify,
   setupInterceptors,
 } from "@sailfish/sf-veritas-nextjs";
 
-// Use a global variable to ensure setupInterceptors is only run once
-if (!(globalThis as any).__interceptors_initialized__) {
+// Ensure interceptors are only initialized once
+// if (!(globalThis as any).__interceptors_initialized__) {
   console.log("Initializing interceptors in middleware...");
-  setupInterceptors({
-    apiKey: "75ebed9a-b0dc-4a45-bd80-30b1516d8016",
-    domainsToNotPropagateHeadersTo: [
-      "google.com",
-      "https://app.sailfishqa.com",
-      "https://arxiv.org",
-      "https://github.com",
-    ],
-  });
-  identify("user11");
-  addOrUpdateMetadata("user11");
-  (globalThis as any).__interceptors_initialized__ = true;
-}
+
+  // try {
+    // Cast each imported member to 'any' so that we can call them with 'new'
+    setupInterceptors({
+      apiKey: "e66bfbc9-c069-4591-bac6-605b0116b7eb",
+      apiGraphqlEndpoint: "http://localhost:8000/graphql/",
+      domainsToNotPropagateHeadersTo: [
+        "google.com",
+        "https://app.sailfishqa.com",
+        "https://arxiv.org",
+        "https://github.com",
+      ],
+    });
+    // new (identify as any)("user11");
+    // new (addOrUpdateMetadata as any)("user11");
+
+  //   (globalThis as any).__interceptors_initialized__ = true;
+  // } catch (error) {
+  //   console.error("Error initializing interceptors:", error);
+  // }
+// }

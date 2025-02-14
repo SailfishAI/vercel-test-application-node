@@ -1,5 +1,5 @@
 import { NextApiRequest, NextApiResponse } from "next";
-import "./serverInit";
+// import "./serverInit";
 
 // Define a function with a try-catch block
 function exampleFunction() {
@@ -11,15 +11,19 @@ function exampleFunction() {
 }
 
 export default function handler(req: NextApiRequest, res: NextApiResponse) {
-  console.log(`[API][Exception] ${req} request received at /api/exception`);
+  // console.log(`[API][Exception] ${req} request received at /api/exception`);
 
   switch (req.method) {
     case "GET": {
-      exampleFunction();
-      res.status(200).json({ params: { message: "Exception, world!" } });
+      try {
+        exampleFunction();
+        // res.status(200).json({ params: { message: "Exception, world!" } });
+      } catch (error) {
+        console.error("Error in GET request:", error);
+        res.status(500).json({ error: "Internal Server Error" });
+      }
       break;
     }
-
     case "POST": {
       console.log(
         `[API][Exception] Sending response: { message: 'Exception, world!' } for request POST`,

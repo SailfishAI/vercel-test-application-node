@@ -1,4 +1,4 @@
-import "../serverInit";
+// import "../serverInit";
 
 import { NextApiRequest, NextApiResponse } from "next";
 

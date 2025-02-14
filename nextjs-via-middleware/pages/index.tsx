@@ -8,7 +8,14 @@ export default function Home() {
     import("@sailfish/recorder")
       .then(({ startRecording }) => {
         startRecording({
-          apiKey: "75ebed9a-b0dc-4a45-bd80-30b1516d8016",
+          apiKey: "e66bfbc9-c069-4591-bac6-605b0116b7eb",
+          backendApi: "http://localhost:8000",
+          // domainsToNotPropagateHeadersTo: [
+          //   "google.com",
+          //   "https://app.sailfishqa.com",
+          //   "https://arxiv.org",
+          //   "https://github.com",
+          // ],
         });
       })
       .catch((error) => {
@@ -17,36 +24,89 @@ export default function Home() {
   }, []);
 
   const fetchHello = async () => {
-    console.log("[Frontend] Fetching data from /api/hello...");
-    try {
-      const response = await fetch("/api/hello");
-      const data = await response.json();
-      console.log("[Frontend] Response from /api/hello:", data);
-    } catch (error) {
-      console.error("[Frontend] Error fetching /api/hello:", error);
-    }
+    console.log("[Frontend] Fetching data from /api/hello 20 times...");
+    const promises = Array.from({ length: 20 }, (_, index) =>
+      fetch("/api/hello")
+        .then((response) => {
+          if (!response.ok) {
+            return response.text().then((text) => {
+              throw new Error(
+                `HTTP error! status: ${response.status}, response: ${text}`,
+              );
+            });
+          }
+          return response.json();
+        })
+        .then((data) =>
+          console.log(
+            `[Frontend] Response from /api/hello request ${index + 1}:`,
+            data,
+          ),
+        )
+        .catch((error) =>
+          console.error(
+            `[Frontend] Error fetching /api/hello request ${index + 1}:`,
+            error,
+          ),
+        ),
+    );
+    await Promise.all(promises);
   };
 
   const fetchUser = async () => {
-    console.log("[Frontend] Fetching data from /api/user/123...");
-    try {
-      const response = await fetch("/api/user/123");
-      const data = await response.json();
-      console.log("[Frontend] Response from /api/user/123:", data);
-    } catch (error) {
-      console.error("[Frontend] Error fetching /api/user/123:", error);
-    }
+    console.log("[Frontend] Fetching data from /api/user/123 20 times...");
+    const promises = Array.from({ length: 20 }, (_, index) =>
+      fetch("/api/user/123")
+        .then((response) => {
+          if (!response.ok) {
+            return response.text().then((text) => {
+              throw new Error(
+                `HTTP error! status: ${response.status}, response: ${text}`,
+              );
+            });
+          }
+          return response.json();
+        })
+        .then((data) =>
+          console.log(
+            `[Frontend] Response from /api/user/123 request ${index + 1}:`,
+            data,
+          ),
+        )
+        .catch((error) =>
+          console.error(
+            `[Frontend] Error fetching /api/user/123 request ${index + 1}:`,
+            error,
+          ),
+        ),
+    );
+    await Promise.all(promises);
   };
 
   const fetchException = async () => {
-    console.log("[Frontend] Fetching data from /api/exception...");
-    try {
-      const response = await fetch("/api/exception");
-      const data = await response.json();
-      console.log("[Frontend] Response from /api/exception:", data);
-    } catch (error) {
-      console.error("[Frontend] Error fetching /api/exception:", error);
-    }
+    console.log("[Frontend] Fetching data from /api/exception 1 time...");
+    const promises = Array.from({ length: 1 }, (_, index) =>
+      fetch("/api/exception")
+        .then((response) => {
+          if (!response.ok) {
+            return response.text().then();
+          }
+          return response.json();
+        })
+        .then((data) =>
+          console.log(
+            `[Frontend] Response from /api/exception request ${index + 1}:`,
+            data,
+          ),
+        )
+        .catch((error) =>
+          console.error(
+            `[Frontend] Error fetching /api/exception request ${index + 1}:`,
+            error,
+          ),
+        ),
+    );
+    await Promise.all(promises);
   };
 
   return (

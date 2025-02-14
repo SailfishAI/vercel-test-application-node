@@ -1,7 +1,7 @@
 {
   "compilerOptions": {
     "target": "ES2017",
-    "lib": ["ES2020", "DOM", "DOM.Iterable"], // Replace `es2024` with a supported version
+    // "lib": ["ES2020", "DOM", "DOM.Iterable"], // Replace `es2024` with a supported version
     "allowJs": true,
     "skipLibCheck": true,
     "strict": true,
@@ -24,7 +24,12 @@
       "@/*": [
         "./src/*"
       ]
-    }
+    },
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ]
   },
   "include": [
     "next-env.d.ts",
