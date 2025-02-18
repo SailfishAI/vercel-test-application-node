@@ -4,18 +4,20 @@ import { useEffect } from "react";
 
 export default function Home() {
   useEffect(() => {
-    // Start recording when the component is mounted
     import("@sailfish/recorder")
       .then(({ startRecording }) => {
         startRecording({
           apiKey: "e66bfbc9-c069-4591-bac6-605b0116b7eb",
           backendApi: "http://localhost:8000",
-          // domainsToNotPropagateHeadersTo: [
-          //   "google.com",
-          //   "https://app.sailfishqa.com",
-          //   "https://arxiv.org",
-          //   "https://github.com",
-          // ],
+          domainsToNotPropagateHeaderTo: [
+            "google.com",
+            "https://app.sailfishqa.com",
+            "https://arxiv.org",
+            "https://github.com",
+            "http://localhost:3002/",
+            "http://localhost:3000/",
+            "http://localhost:8000/",
+          ],
         });
       })
       .catch((error) => {
@@ -25,8 +27,13 @@ export default function Home() {
 
   const fetchHello = async () => {
     console.log("[Frontend] Fetching data from /api/hello 20 times...");
-    const promises = Array.from({ length: 20 }, (_, index) =>
-      fetch("/api/hello")
+    const promises = Array.from({ length: 1 }, (_, index) =>
+      fetch("/api/hello", {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      })
         .then((response) => {
           if (!response.ok) {
             return response.text().then((text) => {
@@ -56,7 +63,12 @@ export default function Home() {
   const fetchUser = async () => {
     console.log("[Frontend] Fetching data from /api/user/123 20 times...");
     const promises = Array.from({ length: 20 }, (_, index) =>
-      fetch("/api/user/123")
+      fetch("/api/user/123", {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      })
         .then((response) => {
           if (!response.ok) {
             return response.text().then((text) => {
@@ -84,12 +96,21 @@ export default function Home() {
   };
 
   const fetchException = async () => {
-    console.log("[Frontend] Fetching data from /api/exception 1 time...");
+    console.log("[Frontend] Fetching data from /api/exception 2 times...");
     const promises = Array.from({ length: 1 }, (_, index) =>
-      fetch("/api/exception")
+      fetch("/api/exception", {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      })
         .then((response) => {
           if (!response.ok) {
-            return response.text().then();
+            return response.text().then((text) => {
+              throw new Error(
+                `HTTP error! status: ${response.status}, response: ${text}`,
+              );
+            });
           }
           return response.json();
         })
