@@ -7,8 +7,7 @@ export default function Home() {
     import("@sailfish/recorder")
       .then(({ startRecording }) => {
         startRecording({
-          apiKey: "e66bfbc9-c069-4591-bac6-605b0116b7eb",
-          backendApi: "http://localhost:8000",
+          apiKey: "75ebed9a-b0dc-4a45-bd80-30b1516d8016",
           domainsToNotPropagateHeaderTo: [
             "google.com",
             "https://app.sailfishqa.com",
@@ -57,7 +56,7 @@ export default function Home() {
   };
 
   // Individual API functions for explicit testing
-  const fetchHello = () => fetchApi("/api/hello", 20);
+  const fetchHello = () => fetchApi("/api/hello", 1);
   const fetchUser = () => fetchApi("/api/user/123", 20);
   const fetchException = () => fetchApi("/api/exception", 1);
 
