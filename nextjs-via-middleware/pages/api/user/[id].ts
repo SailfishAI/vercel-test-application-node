@@ -1,11 +1,12 @@
-// import "../serverInit";
 
 import { NextApiRequest, NextApiResponse } from "next";
+import initialize_server from "../serverInit";
 
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse,
 ) {
+  initialize_server()
   const { id } = req.query;
 
   console.log(`[API][User] ${req.method} request received`);

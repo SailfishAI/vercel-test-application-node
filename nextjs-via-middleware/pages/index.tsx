@@ -4,18 +4,20 @@ import { useEffect } from "react";
 
 export default function Home() {
   useEffect(() => {
-    // Start recording when the component is mounted
     import("@sailfish/recorder")
       .then(({ startRecording }) => {
         startRecording({
           apiKey: "e66bfbc9-c069-4591-bac6-605b0116b7eb",
           backendApi: "http://localhost:8000",
-          // domainsToNotPropagateHeadersTo: [
-          //   "google.com",
-          //   "https://app.sailfishqa.com",
-          //   "https://arxiv.org",
-          //   "https://github.com",
-          // ],
+          domainsToNotPropagateHeaderTo: [
+            "google.com",
+            "https://app.sailfishqa.com",
+            "https://arxiv.org",
+            "https://github.com",
+            "http://localhost:3002/",
+            "http://localhost:3000/",
+            "http://localhost:8000/",
+          ],
         });
       })
       .catch((error) => {
@@ -54,20 +56,19 @@ export default function Home() {
     await Promise.all(promises);
   };
 
+  // Individual API functions for explicit testing
+  const fetchHello = () => fetchApi("/api/hello", 20);
+  const fetchUser = () => fetchApi("/api/user/123", 20);
+  const fetchException = () => fetchApi("/api/exception", 1);
+
   return (
     <div>
       <h1>Next.js API Testing</h1>
       <p>Click the buttons below to test the API endpoints:</p>
 
-      <button onClick={() => fetchApi("/api/hello", 20)}>
-        Fetch Hello API
-      </button>
-      <button onClick={() => fetchApi("/api/user/123", 20)}>
-        Fetch User API
-      </button>
-      <button onClick={() => fetchApi("/api/exception", 1)}>
-        Fetch Exception API
-      </button>
+      <button onClick={fetchHello}>Fetch Hello API</button>
+      <button onClick={fetchUser}>Fetch User API</button>
+      <button onClick={fetchException}>Fetch Exception API</button>
 
       <h2>Exception Testing</h2>
       <button onClick={() => fetchApi("/api/exceptions/db-connection", 1)}>
