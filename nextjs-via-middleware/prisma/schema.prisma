@@ -13,7 +13,15 @@ generator client {
   provider = "prisma-client-js"
 }
 
+model User {
+  id       Int        @id @default(autoincrement())
+  name     String
+  greetings Greeting[] // One-to-Many Relationship with Greeting
+}
+
 model Greeting {
-  id      Int      @id @default(autoincrement())
+  id      Int     @id @default(autoincrement())
   message String
+  userId  Int?    // Foreign key reference to User.id
+  user    User?   @relation(fields: [userId], references: [id], onDelete: Cascade)
 }

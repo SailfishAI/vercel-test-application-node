@@ -23,10 +23,11 @@ export default function Home() {
       });
   }, []);
 
-  const fetchHello = async () => {
-    console.log("[Frontend] Fetching data from /api/hello 20 times...");
-    const promises = Array.from({ length: 20 }, (_, index) =>
-      fetch("/api/hello")
+  // Helper function to make API requests
+  const fetchApi = async (url: string, times = 1) => {
+    console.log(`[Frontend] Fetching data from ${url} ${times} times...`);
+    const promises = Array.from({ length: times }, (_, index) =>
+      fetch(url)
         .then((response) => {
           if (!response.ok) {
             return response.text().then((text) => {
@@ -39,69 +40,13 @@ export default function Home() {
         })
         .then((data) =>
           console.log(
-            `[Frontend] Response from /api/hello request ${index + 1}:`,
+            `[Frontend] Response from ${url} request ${index + 1}:`,
             data,
           ),
         )
         .catch((error) =>
           console.error(
-            `[Frontend] Error fetching /api/hello request ${index + 1}:`,
-            error,
-          ),
-        ),
-    );
-    await Promise.all(promises);
-  };
-
-  const fetchUser = async () => {
-    console.log("[Frontend] Fetching data from /api/user/123 20 times...");
-    const promises = Array.from({ length: 20 }, (_, index) =>
-      fetch("/api/user/123")
-        .then((response) => {
-          if (!response.ok) {
-            return response.text().then((text) => {
-              throw new Error(
-                `HTTP error! status: ${response.status}, response: ${text}`,
-              );
-            });
-          }
-          return response.json();
-        })
-        .then((data) =>
-          console.log(
-            `[Frontend] Response from /api/user/123 request ${index + 1}:`,
-            data,
-          ),
-        )
-        .catch((error) =>
-          console.error(
-            `[Frontend] Error fetching /api/user/123 request ${index + 1}:`,
-            error,
-          ),
-        ),
-    );
-    await Promise.all(promises);
-  };
-
-  const fetchException = async () => {
-    console.log("[Frontend] Fetching data from /api/exception 1 time...");
-    const promises = Array.from({ length: 1 }, (_, index) =>
-      fetch("/api/exception")
-        .then((response) => {
-          if (!response.ok) {
-            return response.text().then();
-          }
-          return response.json();
-        })
-        .then((data) =>
-          console.log(
-            `[Frontend] Response from /api/exception request ${index + 1}:`,
-            data,
-          ),
-        )
-        .catch((error) =>
-          console.error(
-            `[Frontend] Error fetching /api/exception request ${index + 1}:`,
+            `[Frontend] Error fetching ${url} request ${index + 1}:`,
             error,
           ),
         ),
@@ -113,29 +58,41 @@ export default function Home() {
     <div>
       <h1>Next.js API Testing</h1>
       <p>Click the buttons below to test the API endpoints:</p>
-      <button
-        onClick={() => {
-          console.log('[Frontend] "Fetch Hello API" button clicked');
-          fetchHello();
-        }}
-      >
+
+      <button onClick={() => fetchApi("/api/hello", 20)}>
         Fetch Hello API
       </button>
-      <button
-        onClick={() => {
-          console.log('[Frontend] "Fetch User API" button clicked');
-          fetchUser();
-        }}
-      >
+      <button onClick={() => fetchApi("/api/user/123", 20)}>
         Fetch User API
       </button>
-      <button
-        onClick={() => {
-          console.log('[Frontend] "Fetch Exception" button clicked');
-          fetchException();
-        }}
-      >
+      <button onClick={() => fetchApi("/api/exception", 1)}>
         Fetch Exception API
+      </button>
+
+      <h2>Exception Testing</h2>
+      <button onClick={() => fetchApi("/api/exceptions/db-connection", 1)}>
+        DB Connection Error
+      </button>
+      <button onClick={() => fetchApi("/api/exceptions/foreign-key", 1)}>
+        Foreign Key Error
+      </button>
+      <button onClick={() => fetchApi("/api/exceptions/non-existent", 1)}>
+        Non-Existent Record
+      </button>
+      <button onClick={() => fetchApi("/api/exceptions/invalid-data", 1)}>
+        Invalid Data Type
+      </button>
+      <button onClick={() => fetchApi("/api/exceptions/crash", 1)}>
+        Manual Crash
+      </button>
+      <button onClick={() => fetchApi("/api/exceptions/unauthorized", 1)}>
+        Unauthorized Request
+      </button>
+      <button onClick={() => fetchApi("/api/exceptions/db-disconnect", 1)}>
+        DB Disconnection Error
+      </button>
+      <button onClick={() => fetchApi("/api/exceptions/external-api", 1)}>
+        External API Failure
       </button>
     </div>
   );

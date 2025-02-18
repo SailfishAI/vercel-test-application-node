@@ -1,18 +1,16 @@
 import { PrismaClient } from "@prisma/client";
 import { NextApiRequest, NextApiResponse } from "next";
-// import "./serverInit";
 
-
-
-const prisma =
-  // Cast global as any to bypass the type error
-  (global as any).prisma || new PrismaClient();
+const prisma = (global as any).prisma || new PrismaClient();
 
 if (process.env.NODE_ENV !== "production") {
   (global as any).prisma = prisma;
 }
 
-export default async function handler(req: NextApiRequest, res: NextApiResponse) {
+export default async function handler(
+  req: NextApiRequest,
+  res: NextApiResponse,
+) {
   console.log(`[API][Hello] ${req.method} request received at ${req.url}`);
 
   try {
@@ -28,12 +26,15 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       case "POST": {
         console.log("[API][Hello] Received POST request with body:", req.body);
 
-        // Create a new greeting using the provided message or default to "Hello, world!"
-        const newGreeting = await prisma.greeting.create({
-          data: {
-            message: req.body.message || "Hello, world!",
-          },
-        });
+        // Ensure userId is optional but valid
+        const { message, userId } = req.body;
+        const data: any = { message: message || "Hello, world!" };
+
+        if (userId) {
+          data.user = { connect: { id: parseInt(userId) } }; // Ensure userId is an integer
+        }
+
+        const newGreeting = await prisma.greeting.create({ data });
 
         console.log("[API][Hello] Created greeting:", newGreeting);
         res.status(201).json(newGreeting);
@@ -43,15 +44,16 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       case "PUT": {
         console.log("[API][Hello] Received PUT request with body:", req.body);
 
-        // For PUT, expect an id and a new message in the request body.
         const { id, message } = req.body;
         if (!id || !message) {
-          res.status(400).json({ error: "Missing id or message in request body" });
+          res
+            .status(400)
+            .json({ error: "Missing id or message in request body" });
           return;
         }
 
         const updatedGreeting = await prisma.greeting.update({
-          where: { id },
+          where: { id: parseInt(id) }, // Ensure id is an integer
           data: { message },
         });
 
@@ -66,10 +68,10 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         break;
       }
     }
-  } catch (error) {
+  } catch (error: any) {
     console.error("[API][Hello] Error handling request:", error);
     res.status(500).json({
-      error: error instanceof Error ? error.message : "Server error",
+      error: error.message || "Server error",
     });
   }
 }
