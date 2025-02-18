@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "NEXT_WEBPACK=true next dev",
-    "build": "next build",
+    "build": "prisma generate && next build",
     "start": "next start --port 3002",
     "lint": "next lint"
   },
