@@ -1,10 +1,12 @@
-import { NextApiRequest, NextApiResponse } from "next";
 import { PrismaClient } from "@prisma/client";
+import { NextApiResponse } from "next";
+import initialize_server from "../serverInit";
 
 const prisma = new PrismaClient();
 
-export default async function handler(req: NextApiRequest, res: NextApiResponse) {
+export default async function handler(res: NextApiResponse) {
   try {
+    initialize_server()
     const greeting = await prisma.greeting.findUnique({
       where: { id: 999999999999 },
     });

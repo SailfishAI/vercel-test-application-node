@@ -18,6 +18,7 @@ echo "--------------------------------------------------"
 # The --name flag specifies the migration name. Change "init" if desired.
 echo "Running Prisma migration (migrate dev)..."
 npx prisma migrate dev --name init
+npx prisma migrate dev --name add_user_foreign_key
 
 # Step 2: Regenerate the Prisma Client so that types and queries are up-to-date.
 echo "Generating Prisma Client..."

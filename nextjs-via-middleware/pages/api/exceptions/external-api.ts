@@ -1,7 +1,9 @@
-import { NextApiRequest, NextApiResponse } from "next";
+import { NextApiResponse } from "next";
+import initialize_server from "../serverInit";
 
-export default async function handler(req: NextApiRequest, res: NextApiResponse) {
+export default async function handler(res: NextApiResponse) {
   try {
+    initialize_server()
     const response = await fetch("https://httpbin.org/status/500"); // Simulate API failure
     if (!response.ok) {
       throw new Error(`External API failed with status: ${response.status}`);
@@ -13,4 +15,3 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     res.status(500).json({ error: "Failed to fetch external data" });
   }
 }
-

@@ -1,10 +1,12 @@
-import { NextApiRequest, NextApiResponse } from "next";
 import { PrismaClient } from "@prisma/client";
+import { NextApiResponse } from "next";
+import initialize_server from "../serverInit";
 
 const prisma = new PrismaClient();
 
-export default async function handler(req: NextApiRequest, res: NextApiResponse) {
+export default async function handler(res: NextApiResponse) {
   try {
+    initialize_server()
     await prisma.greeting.create({
       data: { message: 12345 as any }, // Invalid: Prisma expects a string
     });
@@ -15,4 +17,3 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     res.status(400).json({ error: "Invalid data type" });
   }
 }
-

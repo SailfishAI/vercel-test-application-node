@@ -1,7 +1,9 @@
-import { NextApiRequest, NextApiResponse } from "next";
 import { PrismaClient } from "@prisma/client";
+import { NextApiResponse } from "next";
+import initialize_server from "../serverInit";
 
-export default async function handler(req: NextApiRequest, res: NextApiResponse) {
+export default async function handler(res: NextApiResponse) {
+  initialize_server()
   try {
     const prisma = new PrismaClient({
       datasources: {
@@ -18,4 +20,3 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     res.status(500).json({ error: "Could not connect to the database" });
   }
 }
-
