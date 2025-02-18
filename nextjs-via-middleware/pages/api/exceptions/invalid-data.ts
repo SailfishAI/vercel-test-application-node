@@ -5,15 +5,10 @@ import initialize_server from "../serverInit";
 const prisma = new PrismaClient();
 
 export default async function handler(res: NextApiResponse) {
-  try {
-    initialize_server()
-    await prisma.greeting.create({
-      data: { message: 12345 as any }, // Invalid: Prisma expects a string
-    });
+  initialize_server();
+  await prisma.greeting.create({
+    data: { message: 12345 as any }, // Invalid: Prisma expects a string
+  });
 
-    res.status(201).json({ message: "Inserted successfully" });
-  } catch (error) {
-    console.error("[API][Invalid Data] Error:", error);
-    res.status(400).json({ error: "Invalid data type" });
-  }
+  res.status(201).json({ message: "Inserted successfully" });
 }
