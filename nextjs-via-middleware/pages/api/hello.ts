@@ -1,6 +1,5 @@
 import { PrismaClient } from "@prisma/client";
 import { NextApiRequest, NextApiResponse } from "next";
-import initialize_server from "./serverInit";
 
 const prisma = (global as any).prisma || new PrismaClient();
 
@@ -13,9 +12,6 @@ export default async function handler(
   res: NextApiResponse,
 ) {
   console.log(`[API][Hello] ${req.method} request received at ${req.url}`);
-
-  // Ensure server initialization before handling requests
-  initialize_server();
 
   try {
     switch (req.method) {

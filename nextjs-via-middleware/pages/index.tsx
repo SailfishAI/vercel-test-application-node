@@ -7,7 +7,7 @@ export default function Home() {
     import("@sailfish/recorder")
       .then(({ startRecording }) => {
         startRecording({
-          apiKey: "75ebed9a-b0dc-4a45-bd80-30b1516d8016",
+          apiKey: "e66bfbc9-c069-4591-bac6-605b0116b7eb",
           domainsToNotPropagateHeaderTo: [
             "google.com",
             "https://app.sailfishqa.com",

@@ -1,10 +1,9 @@
 import { NextApiRequest, NextApiResponse } from "next";
-import initialize_server from "./serverInit";
-
 
 export default function handler(req: NextApiRequest, res: NextApiResponse) {
-  console.log(`[API][Exception] ${req.method} request received at /api/exception`);
-  initialize_server()
+  console.log(
+    `[API][Exception] ${req.method} request received at /api/exception`,
+  );
   // Define a function with a try-catch block
   function exampleFunction() {
     const xxxxxx = 12;
@@ -16,7 +15,6 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
   switch (req.method) {
     case "GET": {
       try {
-
         exampleFunction();
 
         res.status(200).json({ message: "GET request processed successfully" });
@@ -39,7 +37,10 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
     }
 
     case "PUT": {
-      console.log("[API][Exception] Processing PUT request with body:", req.body);
+      console.log(
+        "[API][Exception] Processing PUT request with body:",
+        req.body,
+      );
       const putResponse = {
         message: "Data updated successfully.",
         updatedData: req.body,

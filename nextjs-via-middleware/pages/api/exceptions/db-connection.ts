@@ -1,9 +1,7 @@
 import { PrismaClient } from "@prisma/client";
 import { NextApiResponse } from "next";
-import initialize_server from "../serverInit";
 
 export default async function handler(res: NextApiResponse) {
-  initialize_server();
   const prisma = new PrismaClient({
     datasources: {
       db: {
