@@ -10,6 +10,10 @@
 # Exit immediately if a command exits with a non-zero status.
 set -e
 
+
+rm -rf .next node_modules
+npm install
+
 echo "--------------------------------------------------"
 echo "Starting Prisma migration and client generation..."
 echo "--------------------------------------------------"
@@ -20,18 +24,9 @@ echo "Running Prisma migration (migrate dev)..."
 npx prisma migrate dev --name init
 npx prisma migrate dev --name add_user_foreign_key
 
-# Step 2: Regenerate the Prisma Client so that types and queries are up-to-date.
-echo "Generating Prisma Client..."
-npx prisma generate
+npm run build
+npm run start
 
 echo "--------------------------------------------------"
 echo "Prisma migration and client generation completed successfully."
 echo "--------------------------------------------------"
-
-
-
-rm -rf .next node_modules
-npm install
-
-npm run build
-npm run start
