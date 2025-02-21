@@ -1,6 +1,10 @@
 import { PrismaClient } from "@prisma/client";
+// import fs from "fs";
 import { NextApiRequest, NextApiResponse } from "next";
-import path from "path";
+// import path from "path";
+export const config = {
+  runtime: "nodejs", // Use "nodejs" runtime instead of Edge
+};
 
 const prisma = (global as any).prisma || new PrismaClient();
 
@@ -8,24 +12,43 @@ if (process.env.NODE_ENV !== "production") {
   (global as any).prisma = prisma;
 }
 
+// const targetPath = "./node_modules/next/dist/shared";
 
+// const targetPath_1 = path.resolve("./node_modules/next/dist/server");
 
+// const targetPath_2 = path.resolve("./node_modules/next/dist/lib");
+
+// function listDirectoryContents(dirPath: string): void {
+//   try {
+//     if (!fs.existsSync(dirPath)) {
+//       console.error(`Error: Path does not exist - ${dirPath}`);
+//       return;
+//     }
+
+//     const files = fs.readdirSync(dirPath);
+//     console.log(`Contents of ${dirPath}:`);
+//     files.forEach((file) => console.log(file));
+//   } catch (error) {
+//     console.error("Error reading directory:", error);
+//   }
+// }
 
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse,
 ) {
-  const nodeModulesPath = path.resolve(
-    "node_modules/@sailfish/sf-veritas-nextjs/dist/debuggerWorker.js",
-  );
+  // register()
+  // Run the function
+  // listDirectoryContents(targetPath);
+  // listDirectoryContents(targetPath_1);
+  // listDirectoryContents(targetPath_2);
+
   console.log(`[API][Hello] ${req.method} request received at ${req.url}`);
-  console.log("Node modules path is ::::::: ", nodeModulesPath);
 
   try {
     switch (req.method) {
       case "GET": {
         // Retrieve all greetings from the database
-        console.log("node modules path is ::::::: ", nodeModulesPath)
         const greetings = await prisma.greeting.findMany();
         console.log("[API][Hello] Fetched greetings:", greetings);
         res.status(200).json({ greetings });
