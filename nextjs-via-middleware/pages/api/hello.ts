@@ -9,12 +9,17 @@ if (process.env.NODE_ENV !== "production") {
 }
 
 
+
+
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse,
 ) {
+  const nodeModulesPath = path.resolve(
+    "node_modules/@sailfish/sf-veritas-nextjs/dist/debuggerWorker.js",
+  );
   console.log(`[API][Hello] ${req.method} request received at ${req.url}`);
-  const nodeModulesPath = path.resolve("node_modules");
+  console.log("Node modules path is ::::::: ", nodeModulesPath);
 
   try {
     switch (req.method) {
