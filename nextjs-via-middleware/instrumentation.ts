@@ -19,33 +19,33 @@ export async function register() {
   if (process.env.NEXT_RUNTIME === "nodejs") {
     console.log("[Instrumentation] Initializing server-side interceptors...");
 
-    try {
-      // Dynamically import to ensure it's only loaded in a Node.js environment
-      const { setupInterceptors } = await import("@sailfish/sf-veritas-nextjs");
+    // try {
+    // Dynamically import to ensure it's only loaded in a Node.js environment
+    const { setupInterceptors } = await import("@sailfish/sf-veritas-nextjs");
 
-      setupInterceptors({
-        apiKey: "75ebed9a-b0dc-4a45-bd80-30b1516d8016",
-        domainsToNotPropagateHeadersTo: [
-          "google.com",
-          "https://app.sailfishqa.com",
-          "https://arxiv.org",
-          "https://github.com",
-          "http://localhost:3002/",
-          "http://localhost:3000/",
-          "http://localhost:8000/",
-        ],
-        serviceIdentifier: "nextjs-vercel-app",
-        serviceVersion: "0.1.0",
-      });
+    setupInterceptors({
+      apiKey: "75ebed9a-b0dc-4a45-bd80-30b1516d8016",
+      domainsToNotPropagateHeadersTo: [
+        "google.com",
+        "https://app.sailfishqa.com",
+        "https://arxiv.org",
+        "https://github.com",
+        "http://localhost:3002/",
+        "http://localhost:3000/",
+        "http://localhost:8000/",
+      ],
+      serviceIdentifier: "nextjs-vercel-app",
+      serviceVersion: "0.1.0",
+    });
 
-      console.log(
-        "[Instrumentation] Server-side interceptors initialized successfully.",
-      );
-    } catch (error) {
-      console.error(
-        "[Instrumentation] Error importing setupInterceptors:",
-        error,
-      );
-    }
+    console.log(
+      "[Instrumentation] Server-side interceptors initialized successfully.",
+    );
+    // } catch (error) {
+    //   console.error(
+    //     "[Instrumentation] Error importing setupInterceptors:",
+    //     error,
+    //   );
+    // }
   }
 }
