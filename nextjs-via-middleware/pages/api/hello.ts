@@ -1,5 +1,6 @@
 import { PrismaClient } from "@prisma/client";
 import { NextApiRequest, NextApiResponse } from "next";
+import path from "path";
 
 const prisma = (global as any).prisma || new PrismaClient();
 
@@ -7,16 +8,19 @@ if (process.env.NODE_ENV !== "production") {
   (global as any).prisma = prisma;
 }
 
+
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse,
 ) {
   console.log(`[API][Hello] ${req.method} request received at ${req.url}`);
+  const nodeModulesPath = path.resolve("node_modules");
 
   try {
     switch (req.method) {
       case "GET": {
         // Retrieve all greetings from the database
+        console.log("node modules path is ::::::: ", nodeModulesPath)
         const greetings = await prisma.greeting.findMany();
         console.log("[API][Hello] Fetched greetings:", greetings);
         res.status(200).json({ greetings });
