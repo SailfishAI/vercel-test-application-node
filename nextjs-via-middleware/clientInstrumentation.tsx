@@ -12,7 +12,6 @@ export default function ClientInstrumentation() {
       .then(({ startRecording }) => {
         startRecording({
           apiKey: "75ebed9a-b0dc-4a45-bd80-30b1516d8016",
-          backendApi: "localhost:8000",
           domainsToNotPropagateHeaderTo: [
             "google.com",
             "https://app.sailfishqa.com",
