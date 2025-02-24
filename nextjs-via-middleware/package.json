@@ -9,14 +9,26 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@geist-ui/react": "^2.2.5",
+    "@headlessui-float/react": "^0.15.0",
+    "@headlessui/react": "^1.7.19",
     "@prisma/client": "^6.3.1",
     "@sailfish/recorder": "^1.5.6",
-    "@sailfish/sf-veritas-nextjs": " 0.1.12-alpha0",
+    "@sailfish/sf-veritas-nextjs": "^0.1.13-alpha0",
     "@vercel/edge": "^0.1.2",
+    "ahooks": "^3.8.4",
+    "antd": "^5.24.2",
+    "date-fns": "^4.1.0",
     "dotenv": "^16.4.6",
+    "geist": "^1.3.1",
+    "lodash-es": "^4.17.21",
+    "lucide-react": "^0.475.0",
     "next": "^15.0.4",
+    "ramda": "^0.30.1",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-bootstrap": "^2.10.9",
+    "react-dom": "^18.2.0",
+    "react-icons": "^5.5.0"
   },
   "devDependencies": {
     "@types/dotenv": "^8.2.3",

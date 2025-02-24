@@ -1,29 +1,6 @@
 "use client";
 
-import { useEffect } from "react";
-
 export default function Home() {
-  useEffect(() => {
-    import("@sailfish/recorder")
-      .then(({ startRecording }) => {
-        startRecording({
-          apiKey: "75ebed9a-b0dc-4a45-bd80-30b1516d8016",
-          domainsToNotPropagateHeaderTo: [
-            "google.com",
-            "https://app.sailfishqa.com",
-            "https://arxiv.org",
-            "https://github.com",
-            "http://localhost:3002/",
-            "http://localhost:3000/",
-            "http://localhost:8000/",
-          ],
-        });
-      })
-      .catch((error) => {
-        console.error("[Frontend] Failed to load @sailfish/recorder:", error);
-      });
-  }, []);
-
   // Helper function to make API requests
   const fetchApi = async (url: string, times = 1) => {
     console.log(`[Frontend] Fetching data from ${url} ${times} times...`);
