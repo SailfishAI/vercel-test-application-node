@@ -11,8 +11,13 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
   }
   switch (req.method) {
     case "GET": {
-      exampleFunction();
-      res.status(200).json({ message: "GET request processed successfully" });
+      try {
+        exampleFunction();
+        res.status(200).json({ message: "GET request processed successfully" });
+      } catch (error) {
+        console.error("API Error:", error);
+        res.status(500).json({ error: "Internal Server Error" });
+      }
       break;
     }
 
