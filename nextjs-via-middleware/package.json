@@ -11,10 +11,10 @@
   "dependencies": {
     "@geist-ui/react": "^2.2.5",
     "@headlessui-float/react": "^0.15.0",
-    "@headlessui/react": "^1.7.19",
+    "@headlessui/react": "*",
     "@prisma/client": "^6.3.1",
     "@sailfish/recorder": "^1.5.6",
-    "@sailfish/sf-veritas-nextjs": "0.1.14-alpha0",
+    "@sailfish/sf-veritas-nextjs": "^0.1.14",
     "@vercel/edge": "^0.1.2",
     "ahooks": "^3.8.4",
     "antd": "^5.24.2",
@@ -31,12 +31,12 @@
     "react-icons": "^5.5.0"
   },
   "devDependencies": {
-    "@types/dotenv": "^8.2.3",
+    "@types/dotenv": "*",
     "@types/node": "^20.17.9",
     "@types/react": "^18.3.12",
     "@types/react-dom": "^18.3.1",
-    "eslint": "^8",
-    "eslint-config-next": "15.0.3",
+    "eslint": "*",
+    "eslint-config-next": "*",
     "postcss": "^8",
     "prisma": "^6.3.1",
     "tailwindcss": "^3.4.1",
