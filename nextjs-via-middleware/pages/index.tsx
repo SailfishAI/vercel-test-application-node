@@ -34,7 +34,7 @@ export default function Home() {
 
   // Individual API functions for explicit testing
   const fetchHello = () => fetchApi("/api/hello", 1);
-  const fetchUser = () => fetchApi("/api/user/123", 20);
+  const fetchUser = () => fetchApi("/api/user/123", 100);
   const fetchException = () => fetchApi("/api/exception", 1);
 
   return (

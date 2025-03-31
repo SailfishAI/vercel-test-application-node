@@ -14,7 +14,7 @@
     "@headlessui/react": "*",
     "@prisma/client": "^6.3.1",
     "@sailfish/recorder": "^1.6.4",
-    "@sailfish/sf-veritas-nextjs": "0.1.16-alpha0",
+    "@sailfish/sf-veritas": "0.1.16-alpha0",
     "@vercel/edge": "^0.1.2",
     "ahooks": "^3.8.4",
     "antd": "^5.24.2",
@@ -28,7 +28,8 @@
     "react": "^18.2.0",
     "react-bootstrap": "^2.10.9",
     "react-dom": "^18.2.0",
-    "react-icons": "^5.5.0"
+    "react-icons": "^5.5.0",
+    "source-map": "^0.7.4"
   },
   "devDependencies": {
     "@types/dotenv": "*",
