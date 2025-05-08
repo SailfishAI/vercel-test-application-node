@@ -21,16 +21,16 @@ export async function register() {
 
     try {
       // Dynamically import to ensure it's only loaded in a Node.js environment
-      const { setupInterceptors } = await import("@sailfish/sf-veritas");
+      const { setupInterceptors } = await import("@sailfish-ai/sf-veritas");
 
       setupInterceptors({
         apiKey: "75ebed9a-b0dc-4a45-bd80-30b1516d8016",
-        domainsToNotPropagateHeadersTo: [
-          "google.com",
-          "https://app.sailfishqa.com",
-          "https://arxiv.org",
-          "https://github.com",
-        ],
+        // domainsToNotPropagateHeadersTo: [
+        //   "google.com",
+        //   "https://app.sailfishqa.com",
+        //   "https://arxiv.org",
+        //   "https://github.com",
+        // ],
         serviceIdentifier: "nextjs-vercel-app",
         serviceVersion: "0.1.0",
         nodeModulesToCollectLocalVariablesOn: ["node:internal"],
