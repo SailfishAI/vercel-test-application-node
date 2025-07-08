@@ -8,7 +8,7 @@ export default function ClientInstrumentation() {
       "[Instrumentation] Initializing client-side event recording...",
     );
 
-    import("@sailfish/recorder")
+    import("@sailfish-ai/recorder")
       .then(({ startRecording }) => {
         startRecording({
           apiKey: "75ebed9a-b0dc-4a45-bd80-30b1516d8016",
@@ -26,7 +26,7 @@ export default function ClientInstrumentation() {
       })
       .catch((error) => {
         console.error(
-          "[Instrumentation] Failed to load @sailfish/recorder:",
+          "[Instrumentation] Failed to load @sailfish-ai/recorder:",
           error,
         );
       });
