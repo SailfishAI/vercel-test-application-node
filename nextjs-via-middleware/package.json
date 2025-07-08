@@ -13,8 +13,8 @@
     "@headlessui-float/react": "^0.15.0",
     "@headlessui/react": "*",
     "@prisma/client": "^6.3.1",
-    "@sailfish/recorder": "^1.7.20",
-    "@sailfish/sf-veritas": "0.1.27",
+    "@sailfish-ai/recorder": "^1.7.20",
+    "@sailfish-ai/sf-veritas": "0.1.27",
     "@vercel/edge": "^0.1.2",
     "ahooks": "^3.8.4",
     "antd": "^5.24.2",
@@ -29,7 +29,8 @@
     "react-bootstrap": "^2.10.9",
     "react-dom": "^18.2.0",
     "react-icons": "^5.5.0",
-    "source-map": "^0.7.4"
+    "source-map": "^0.7.4",
+    "webpack": "^5.99.9"
   },
   "devDependencies": {
     "@types/dotenv": "*",
