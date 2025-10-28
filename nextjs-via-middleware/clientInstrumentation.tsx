@@ -9,15 +9,16 @@ export default function ClientInstrumentation() {
     );
 
     import("@sailfish-ai/recorder")
-      .then(({ startRecording }) => {
-        startRecording({
-          apiKey: "75ebed9a-b0dc-4a45-bd80-30b1516d8016",
+      .then(({ initRecorder }) => {
+        initRecorder({
+          apiKey: "d9e011db-8bec-4715-a45b-162892bd91e7",
+          backendApi: "http://localhost:8000",
           domainsToNotPropagateHeaderTo: [
             "google.com",
             "https://app.sailfishqa.com",
             "https://arxiv.org",
             "https://github.com",
-            "http://localhost:3002/",
+            // "http://localhost:3002/",
             "http://localhost:3000/",
             "http://localhost:8000/",
           ],

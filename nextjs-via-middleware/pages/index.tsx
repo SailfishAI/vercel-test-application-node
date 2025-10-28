@@ -3,6 +3,7 @@
 export default function Home() {
   // Helper function to make API requests
   const fetchApi = async (url: string, times = 1) => {
+    console.log(`[Frontend] Starting fetchApi for ${url}...`);
     console.log(`[Frontend] Fetching data from ${url} ${times} times...`);
     const promises = Array.from({ length: times }, (_, index) =>
       fetch(url)
@@ -34,7 +35,7 @@ export default function Home() {
 
   // Individual API functions for explicit testing
   const fetchHello = () => fetchApi("/api/hello", 1);
-  const fetchUser = () => fetchApi("/api/user/123", 100);
+  const fetchUser = () => fetchApi("/api/user/123", 1);
   const fetchException = () => fetchApi("/api/exception", 1);
 
   return (
@@ -71,6 +72,27 @@ export default function Home() {
       <button onClick={() => fetchApi("/api/exceptions/external-api", 1)}>
         External API Failure
       </button>
+                <div
+              className='flex items-center px-[20px] h-fit'
+              onClick={async () => {
+                const { openReportIssueModal } = await import("@sailfish-ai/recorder");
+                openReportIssueModal();
+                  // alert('Button works!');
+
+              }}
+              role='button'
+              tabIndex={0}
+              data-testid='help'
+            >
+              <div className='flex items-center h-fit gap-2.5 rounded-[8px] hover:bg-blue-400 w-full'>
+                <span className='flex justify-center w-[35px] h-[35px] items-center'>
+                  
+
+
+                </span>
+                Report Issue
+              </div>
+            </div>
     </div>
   );
 }

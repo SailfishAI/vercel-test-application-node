@@ -16,15 +16,24 @@ export async function register() {
 
     try {
       // Dynamically import to ensure it's only loaded in a Node.js environment
-      const { setupInterceptors } = await import("@sailfish-ai/sf-veritas");
+      const { setupInterceptors, addOrUpdateMetadata } = await import("@sailfish-ai/sf-veritas");
 
       setupInterceptors({
-        apiKey: "75ebed9a-b0dc-4a45-bd80-30b1516d8016",
-        nodeModulesToCollectLocalVariablesOn: [],
+        apiKey: "d9e011db-8bec-4715-a45b-162892bd91e7",
+        nodeModulesToCollectLocalVariablesOn: ["express", "next"],
+        apiGraphqlEndpoint: "http://localhost:8000/graphql/",
         serviceIdentifier:
           "sailfishai/vercel-test-application-node/sailfish/backend/instrumentation.ts",
         serviceVersion: "0.1.0",
+        debug: false,
+        gitSha: "fa1eade47b73733d6312d5abfad33ce9e4068081",
+        serviceAdditionalMetadata: {
+          environment: "production",
+          cluster: "east-coast",
+        },
       });
+      addOrUpdateMetadata("user-123", { birthday: "2000-01-01" }, "true");
+
 
       console.log(
         "[Instrumentation] Server-side interceptors initialized successfully.",
