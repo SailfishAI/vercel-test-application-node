@@ -21,20 +21,27 @@ bun dev
 ```bash
 $ curl http://localhost:3000/api/hello
 ```
+
 **Response**
+
 ```
 {
     "message":"Hello, world!"
 }
 ```
+
 ### Fetch User API
+
 ```bash
 $ curl http://localhost:3000/api/user/123
 ```
+
 **Response**
+
 ```
 {"userId":"123","name":"Test User"}
 ```
+
 ## Learn More
 
 To learn more about Next.js, take a look at the following resources:
@@ -46,6 +53,26 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 
 ## Deploy on Vercel
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### Prerequisites
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- Install Vercel CLI: `npm install -g vercel`
+- Authenticate: `vercel login`
+
+### Deployment
+
+**Important:** Deploy from the parent directory (`/vercel-test-application-node`), not from this subdirectory.
+
+```bash
+# Navigate to the parent directory
+cd <GIT_REPO_ROOT>
+
+# Deploy to production
+vercel --prod --yes
+```
+
+### Verify Deployment
+
+After deployment completes, Vercel will provide a production URL
+   - **Note:** The actual URL depends on your Vercel project name and configuration (e.g., `https://your-project-name.vercel.app`)
+
+For more details, check out the [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying).
