@@ -9,8 +9,8 @@ export default function ClientInstrumentation() {
     );
 
     import("@sailfish-ai/recorder")
-      .then(({ startRecording }) => {
-        startRecording({
+      .then(({ initRecorder }) => {
+        initRecorder({
           apiKey: "75ebed9a-b0dc-4a45-bd80-30b1516d8016",
           domainsToNotPropagateHeaderTo: [
             "google.com",
